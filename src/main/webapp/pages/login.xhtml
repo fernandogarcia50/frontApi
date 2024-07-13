@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <link rel="shortcut icon" href="../resources/favicons/favicon.ico" />
+        </f:facet>
+        <title>Inicio de Sesión</title>
+        <ui:insert name="head" />
+    </h:head>
+
+
+    <h:body>
+        <h:form id="formInicio">
+            
+            <p:growl id="msgs" showSummary="true" showDetail="true" sticky="true" />
+            <p:panel id="idPanel" header="Iniciar Sesión" style="width: 70%">
+
+                <p:panelGrid id="panelGrid" columns="2" layout="grid" style="width: 100%">
+
+                    <p:outputLabel>Usuario:</p:outputLabel>
+                    <p:inputText value="#{loginBean.username}" styleClass="login-input"
+                                 placeholder="Usuario" />
+
+                    <p:outputLabel>Contraseña:</p:outputLabel>
+                    <p:password value="#{loginBean.password}" styleClass="login-input"
+                                placeholder="Contraseña" />
+
+                </p:panelGrid>
+
+                <p:panelGrid id="panelGridBtn" columns="4" layout="grid" style="width: 70%">
+
+                    <p:commandButton id="btn-login" value="Ingresar" 
+                                     action="#{loginBean.verificar}" update="msgs,idPanel" />
+
+                </p:panelGrid>
+
+            </p:panel>
+            
+            <p:ajaxStatus onstart="PF('statusAjax').show()"
+			onsuccess="PF('statusAjax').hide()" />
+		<p:dialog widgetVar="statusAjax" modal="true" closable="false"
+			resizable="false" header="Procesando...">
+			
+		</p:dialog>
+
+        </h:form>
+    </h:body>
+</html>
